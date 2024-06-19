@@ -33,6 +33,10 @@ function menuExecutar(){
             case '5':
                 rl.close()
                 break
+            case '69':
+                console.log('você é muito safadinho, pare com isso.')
+                menuExecutar()
+                break
             default:
                 console.log('Comando invalido')
                 menuExecutar()
