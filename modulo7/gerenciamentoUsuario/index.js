@@ -39,7 +39,7 @@ function mainMenu() {
         const novoNome = prompt('Novo nome: ');
         const novoTelefone = prompt('Novo telefone: ');
         const novoEmail = prompt('Novo email: ');
-        atualizarUsuario(index, { nome: novoNome, telefone: novoTelefone, email: novoEmail });
+        atualizarUsuario(index, { id: usuarios[index].id, nome: novoNome, telefone: novoTelefone, email: novoEmail });
         console.log('Usuario atualizado com sucesso!');
         mainMenu();
         break;
