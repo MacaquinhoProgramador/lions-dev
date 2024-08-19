@@ -4,8 +4,8 @@ let baralhos = [
 ]
 
 let flashcards = [
-    { id: 1, pergunta: 'granadas na A.', resposta: 'ct, passagem e cabecinha.', idBaralho: 1 },
-    { id: 1, pergunta: 'o que é budswitch.', resposta: 'sensor de atualização de bloco arcaico.', idBaralho: 2 }
+    { id: 1, pergunta: 'o que é budswitch.', resposta: 'sensor de atualização de bloco arcaico.', idBaralho: 2 },
+    { id: 2, pergunta: 'granadas na A.', resposta: 'ct, passagem e cabecinha.', idBaralho: 1 }
 ]
 
-module.exports = { baralhos }
+module.exports = { baralhos, flashcards }

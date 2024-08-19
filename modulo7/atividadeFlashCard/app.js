@@ -1,25 +1,38 @@
 const prompt = require('prompt-sync')();
-const criarBaralho = require('./criarBaralho');
-const criarFlashcard = require('./criarFlashcard')
-const listarBaralhos = require('./listarBaralhos');
-const atualizarBaralho = require('./atualizarBaralhos');
-const deletarBaralho = require('./deletarBaralhos');
+const criarBaralho = require('./baralho/criarBaralho');
+const criarFlashcard = require('./flashcard/criarFlashcard')
+const listarBaralhos = require('./baralho/listarBaralhos');
+const listarFlashcards = require('./flashcard/listarFlashcards');
+const listarFlashcardsPorBaralho = require('./flashcard/listarFlashcardsPorBaralhoId');
+const atualizarFlashcard = require('./flashcard/atualizarFlashcard');
+const atualizarBaralho = require('./baralho/atualizarBaralhos');
+const deletarBaralho = require('./baralho/deletarBaralho');
 const { baralhos } = require('./data');
-const { flashcards } = require('./data')
+const { flashcards } = require('./data');
+const deletarFlashcard = require('./flashcard/deletarFlashcard');
+
 
 function menu() {
     console.log(`
-    1. Criar caralhos
+    1. Criar Baralho
     2. Criar Flashcard
-    2. Listar caralho
-    3. Atualizar caralho
-    4. deletar caralho
-    5. Sair desse caralho
+    3. Listar Baralhos
+    4. Listar Flashcards
+    5. Listar Flashcards por Baralho
+    6. Atualizar Baralho
+    7. Atualizar Flashcard
+    8. Deletar Baralho
+    9. Deletar Flashcard
+    10. Buscar Flashcards por Pergunta
+    11. Buscar Flashcards por Baralho
+    0. Sair
     `);
     const opcao = prompt('Escolha uma opção: ');
     let index;
     let id;
     let idBaralho;
+    let pergunta;
+    let resposta;
 
     switch (opcao) {
         case '1':
@@ -32,11 +45,12 @@ function menu() {
 
         case '2':
             listarBaralhos();
-            id = flashcards[flashcards.length - 1].id + 1;
             idBaralho = parseInt(prompt('Número do baralho que deseja adicionar flashcards: '));
-            const pergunta = prompt('Pergunta: ');
-            const resposta = prompt('Resposta: ');
-            criarFlashcard(flashcards,{ id: id, perguntas: perguntas, resposta: resposta, idBaralho: idBaralho });
+            id = flashcards[flashcards.length - 1].id + 1;
+            pergunta = prompt('Pergunta: ');
+            resposta = prompt('Resposta: ');
+            criarFlashcard(flashcards, { id: id, pergunta: pergunta, resposta: resposta, idBaralho: idBaralho });
+            menu();
             break;
         case '3':
             listarBaralhos();
@@ -44,6 +58,16 @@ function menu() {
             break;
 
         case '4':
+            listarFlashcards();
+            menu();
+            break;
+
+        case '5':
+            listarFlashcardsPorBaralho();
+            menu();
+            break;
+
+        case '6':
             listarBaralhos();
             id = parseInt(prompt('Número do baralho a atualizar: '));
             const novoTitulo = prompt('Novo titulo: ');
@@ -52,14 +76,34 @@ function menu() {
             menu();
             break;
 
-        case '5':
-            listarBaralhos();
-            id = parseInt(prompt('Número do baralho a remover: '));
-            deletarBaralho(id);
-            console.log('Baralho removido com sucesso!');
+        case '7':
+            listarFlashcardsPorBaralho();
+            idBaralho = parseInt(prompt('Número do baralho do flashcard que deseja atualizar: '));
+            id = parseInt(prompt('Número do flashcard que deseja atualizar: '));
+            novaPergunta = prompt('Pergunta: ');
+            novaResposta = prompt('Resposta: ');
+            atualizarFlashcard(id, { id: flashcards[id-1].id, pergunta: novaPergunta, resposta: novaResposta, idBaralho: flashcards[idBaralho-1].idBaralho }, idBaralho);
+            console.log('Flashcard atualizado com sucesso.')
             menu();
             break;
-        case '6':
+
+        case '8':
+            listarBaralhos();
+            id = parseInt(prompt('Número do baralho a deletato: '));
+            deletarBaralho(id);
+            console.log('Baralho deletado com sucesso!');
+            menu();
+            break;
+
+        case '9':
+            listarFlashcards();
+            id = parseInt(prompt('Número do flashcard a ser removido: '));
+            deletarFlashcard();
+            console.log('Flashcard deletato com sucesso!')
+            menu();
+            break;
+            
+        case '0':
             break;
             
         default:

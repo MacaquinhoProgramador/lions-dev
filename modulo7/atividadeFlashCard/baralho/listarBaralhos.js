@@ -1,7 +1,7 @@
-let {baralhos} = require('./data');
+let { baralhos } = require('../data');
 
 function listarBaralhos() {
-    baralhos.forEach((baralho, index) => {
+    baralhos.forEach((baralho) => {
     console.log(`Id: ${baralho.id}, Titulo: ${baralho.titulo}`);
     });
 }
