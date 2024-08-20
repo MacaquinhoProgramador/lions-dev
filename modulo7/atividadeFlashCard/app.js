@@ -10,6 +10,8 @@ const deletarBaralho = require('./baralho/deletarBaralho');
 const { baralhos } = require('./data');
 const { flashcards } = require('./data');
 const deletarFlashcard = require('./flashcard/deletarFlashcard');
+const buscarFlashcardsporPergunta = require('./flashcard/buscarFlashcardsporPergunta');
+const buscarFlashcardsPorBaralho = require('./flashcard/buscarFlashcardsPorBaralho');
 
 
 function menu() {
@@ -100,6 +102,18 @@ function menu() {
             id = parseInt(prompt('Número do flashcard a ser removido: '));
             deletarFlashcard();
             console.log('Flashcard deletato com sucesso!')
+            menu();
+            break;
+
+        case '10':
+            index = prompt('Digite uma palavra que deseja pesquisar: ');
+            buscarFlashcardsporPergunta(index);
+            menu();
+            break;
+
+        case '11':
+            index = prompt('Digite o baralho que está procurando: ');
+            buscarFlashcardsPorBaralho(index);
             menu();
             break;
             
