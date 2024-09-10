@@ -1,3 +1,4 @@
+
 const { produto } = require('../data');
 
 const listarProdutos = (req, res) => {

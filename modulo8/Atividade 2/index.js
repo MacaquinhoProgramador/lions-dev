@@ -22,3 +22,6 @@ app.put('/produtos/:id', atualizarProduto);
 
 const deletarProduto = require('./produtos/delete');
 app.delete('/produtos/:id', deletarProduto);
+
+const buscarProduto = require('./produtos/getBusca');
+app.get('/produtos/:nome', buscarProduto);
